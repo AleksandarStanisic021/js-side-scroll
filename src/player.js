@@ -3,8 +3,6 @@ const dogImage = new Image();
 dogImage.src = dogImageSrc;
 
 
-
-
 export class Player {
     constructor(game) {
         this.game = game;
@@ -15,20 +13,19 @@ export class Player {
         this.image = dogImage;
     }
 
-    update() { }
+    update() {
+        this.x++;
+    }
 
     draw(context) {
-        context.fillStyle = 'red';
-        context.fillRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image,
             0, 0,
             this.width,
             this.height,
-            0, this.game.height - this.height,
+            this.x, this.y,
             this.width,
             this.height);
     }
-
 }
 
 

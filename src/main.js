@@ -14,13 +14,11 @@ class Game {
     this.player = new Player(this);
   }
   update() {
-    this.player.x += 1;
-    if (this.player.x >= canvas1.width - this.player.width) {
-      this.player.x = 0;
-    }
+    this.player.update();
   }
 
   draw(context) {
+
     this.player.draw(context);
   }
 }
