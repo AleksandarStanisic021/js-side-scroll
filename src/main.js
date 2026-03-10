@@ -1,4 +1,5 @@
 import './assets/style.css'
+import { Player } from './player.js';
 
 
 const canvas1 = document.getElementById('canvas1')
@@ -10,11 +11,28 @@ class Game {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-
-
+    this.player = new Player(this);
   }
-  update() { }
-  draw() { }
+  update() {
+    this.player.x += 1;
+    if (this.player.x >= canvas1.width - this.player.width) {
+      this.player.x = 0;
+    }
+  }
+
+  draw(context) {
+    this.player.draw(context);
+  }
 }
 
+let g = new Game(canvas1.width, canvas1.height);
 
+
+function animate() {
+  ctx.clearRect(0, 0, canvas1.width, canvas1.height);
+  g.update();
+  g.draw(ctx);
+
+  window.requestAnimationFrame(animate);
+}
+animate(0);
