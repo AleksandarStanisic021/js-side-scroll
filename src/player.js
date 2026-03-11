@@ -10,9 +10,11 @@ export class Player {
         this.height = 91.3;
         this.x = 0;
         this.y = this.game.height - this.height;
+        this.vy = 0;
         this.image = dogImage;
         this.speed = 0;
         this.maxSpeed = 10;
+        this.velocityRight = 1;
     }
 
     update(input) {
@@ -20,6 +22,11 @@ export class Player {
         if (input.includes('ArrowRight')) this.speed = this.maxSpeed;
         else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
         else this.speed = 0;
+
+        if (input.includes('ArrowUp') && this.onGround()) this.vy -= 10;
+        this.y += this.vy;
+        if (!this.onGround()) this.vy += this.velocityRight;
+        else this.vy = 0;
     }
 
     draw(context) {
@@ -31,7 +38,9 @@ export class Player {
             this.width,
             this.height);
     }
+    onGround() { return this.y >= this.game.height - this.height; }
 }
+
 
 
 
