@@ -1,5 +1,6 @@
 import './assets/style.css'
 import { Player } from './player.js';
+import {InputHandler} from './input.js';
 
 
 const canvas1 = document.getElementById('canvas1')
@@ -12,6 +13,8 @@ class Game {
     this.width = width;
     this.height = height;
     this.player = new Player(this);
+    const input=new InputHandler(); 
+
   }
   update() {
     this.player.update();
@@ -23,13 +26,13 @@ class Game {
   }
 }
 
-let g = new Game(canvas1.width, canvas1.height);
+let game = new Game(canvas1.width, canvas1.height);
 
 
 function animate() {
   ctx.clearRect(0, 0, canvas1.width, canvas1.height);
-  g.update();
-  g.draw(ctx);
+  game.update();
+  game.draw(ctx);
 
   window.requestAnimationFrame(animate);
 }
