@@ -23,7 +23,7 @@ export class Player {
         else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
         else this.speed = 0;
 
-        if (input.includes('ArrowUp') && this.onGround()) this.vy -= 10;
+        if (input.includes('ArrowUp') && this.onGround()) this.vy -= 30;
         this.y += this.vy;
         if (!this.onGround()) this.vy += this.velocityRight;
         else this.vy = 0;
