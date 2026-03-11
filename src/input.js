@@ -5,7 +5,6 @@ export class InputHandler {
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown' && this.keys.indexOf(e.key) === -1) {
         this.keys.push(e.key)
-        console.log(this.keys);
       }
     })
     window.addEventListener(('keyup'), (e) => {
@@ -14,7 +13,6 @@ export class InputHandler {
       }
     })
     window.addEventListener('keydown', (e) => {
-
       if (e.key === 'ArrowUp' && this.keys.indexOf(e.key) === -1) {
         this.keys.push(e.key)
       }
@@ -25,7 +23,6 @@ export class InputHandler {
       }
     })
     window.addEventListener('keydown', (e) => {
-
       if (e.key === 'ArrowLeft' && this.keys.indexOf(e.key) === -1) {
         this.keys.push(e.key)
 
@@ -46,5 +43,15 @@ export class InputHandler {
         this.keys.splice(this.keys.indexOf(e.key, 1));
       }
     })
-  }//constructor
-}//class
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && this.keys.indexOf(e.key) === -1) {
+        this.keys.push(e.key)
+      }
+    })
+    window.addEventListener(('keyup'), (e) => {
+      if (e.key === 'Enter') {
+        this.keys.splice(this.keys.indexOf(e.key, 1));
+      }
+    })
+  }
+}
