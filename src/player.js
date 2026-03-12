@@ -1,6 +1,8 @@
 import dogImageSrc from './assets/player.png'
 import { Sitting } from './playerStates.js';
 import { Running } from './playerStates.js';
+import { Jumping } from './playerStates.js';
+import { Falling } from './playerStates.js';
 
 
 
@@ -22,7 +24,7 @@ export class Player {
         this.speed = 0;
         this.maxSpeed = 10;
         this.velocityRight = 1;
-        this.states = [new Sitting(this), new Running(this)]
+        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this)]
         this.currentState = this.states[0];
         this.currentState.enter();
     }
@@ -34,7 +36,7 @@ export class Player {
         else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
         else this.speed = 0;
 
-        if (input.includes('ArrowUp') && this.onGround()) this.vy -= 30;
+        // if (input.includes('ArrowUp') && this.onGround()) this.vy -= 30;
         this.y += this.vy;
         if (!this.onGround()) this.vy += this.velocityRight;
         else this.vy = 0;
