@@ -31,16 +31,14 @@ export class Running extends State {
     constructor(player) {
         super('RUNNING');
         this.player = player;
-
     }
     enter() {
         this.player.FrameY = 3;
-
     }
+
     handleInput(input) {
         if (input.includes('ArrowDown')) {
             this.player.setState(statesEnum.SITTING);
         }
-
     }
 }

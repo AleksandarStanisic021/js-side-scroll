@@ -24,7 +24,7 @@ export class Player {
         this.velocityRight = 1;
         this.states = [new Sitting(this), new Running(this)]
         this.currentState = this.states[0];
-        //this.currentState.enter();
+        this.currentState.enter();
     }
 
     update(input) {
