@@ -1,10 +1,10 @@
-*{
+* {
   margin: 0;
   padding: 0;
-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-#app{
+#app {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,8 +13,6 @@ box-sizing: border-box;
   overflow: hidden;
 }
 
-#canvas1{
-  border: 3px solid red;
-
-background-color: blueviolet;
+#canvas1 {
+  background-color: blueviolet;
 }

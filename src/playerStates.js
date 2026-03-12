@@ -15,7 +15,6 @@ export class Sitting extends State {
     constructor(player) {
         super('SITTING');
         this.player = player;
-
     }
     enter() {
         this.player.FrameY = 5;
@@ -42,3 +41,19 @@ export class Running extends State {
         }
     }
 }
+
+export class Jumping extends State {
+    constructor(player) {
+        super('JUMPING');
+        this.player = player;
+    }
+    enter() {
+        this.player.FrameY = 1;
+    }
+    handleInput(input) {
+        if (input.includes('ArrowUp')) {
+            this.player.setState(statesEnum.JUMPING);
+        }
+    }
+}
+
