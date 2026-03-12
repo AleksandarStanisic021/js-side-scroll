@@ -25,7 +25,6 @@ export class InputHandler {
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft' && this.keys.indexOf(e.key) === -1) {
         this.keys.push(e.key)
-
       }
     })
     window.addEventListener(('keyup'), (e) => {

@@ -1,4 +1,7 @@
 import dogImageSrc from './assets/player.png'
+import { Sitting } from './playerStates.js'
+
+
 const dogImage = new Image();
 dogImage.src = dogImageSrc;
 
@@ -15,6 +18,9 @@ export class Player {
         this.speed = 0;
         this.maxSpeed = 10;
         this.velocityRight = 1;
+        this.states[new Sitting(this)];
+        this.currentState = states[0];
+        this.currentState.enter();
     }
 
     update(input) {

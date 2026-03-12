@@ -14,7 +14,9 @@ box-sizing: border-box;
 }
 
 #canvas1{
-  border: 3px solid red;
-
-background-color: blueviolet;
+  border: 3px solid black;
+  background: linear-gradient(180deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
 }
+
+
+
