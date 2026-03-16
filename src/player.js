@@ -24,6 +24,8 @@ export class Player {
         this.speed = 0;
         this.maxSpeed = 10;
         this.maxFrame = 5;
+        this.timer = 0;
+        this.delay = 50;
         this.currentFrame = 0;
         this.velocityRight = 1;
         this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this)]
@@ -31,7 +33,7 @@ export class Player {
         this.currentState.enter();
     }
 
-    update(input) {
+    update(input, deltaTime) {
         this.currentState.handleInput(input);
         this.x += this.speed;
         if (input.includes('ArrowRight')) this.speed = this.maxSpeed;
@@ -43,9 +45,13 @@ export class Player {
         if (!this.onGround()) this.vy += this.velocityRight;
         else this.vy = 0;
 
-        if (this.FrameX < this.maxFrame) this.FrameX++;
-        else this.FrameX = 0;
-
+        if (this.timer > this.delay) {
+            this.timer = 0;
+            if (this.FrameX < this.maxFrame) this.FrameX++;
+            else this.FrameX = 0;
+        } else {
+            this.timer += deltaTime;
+        }
     }
 
     draw(context) {
