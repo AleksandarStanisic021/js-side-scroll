@@ -70,9 +70,10 @@ export class Player {
         return this.y >= this.game.height - this.height - 50
     }
 
-    setState(state) {
+    setState(state, speed) {
         // `state` is an index from the states enum; map to the state instance
         this.currentState = this.states[state];
+        this.game.speed = speed;
         if (this.currentState && typeof this.currentState.enter === 'function') {
             this.currentState.enter();
         }

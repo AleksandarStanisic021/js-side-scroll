@@ -23,7 +23,7 @@ export class Sitting extends State {
 
     handleInput(input) {
         if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
-            this.player.setState(statesEnum.RUNNING);
+            this.player.setState(statesEnum.RUNNING, 1);
         }
     }
 }
@@ -39,9 +39,9 @@ export class Running extends State {
 
     handleInput(input) {
         if (input.includes('ArrowDown')) {
-            this.player.setState(statesEnum.SITTING);
+            this.player.setState(statesEnum.SITTING, 0);
         } else if (input.includes('ArrowUp')) {
-            this.player.setState(statesEnum.JUMPING);
+            this.player.setState(statesEnum.JUMPING, 1);
         }
     }
 }
@@ -58,7 +58,7 @@ export class Jumping extends State {
     }
     handleInput(input) {
         if (this.player.vy > this.player.velocityRight) {
-            this.player.setState(statesEnum.FALLING);
+            this.player.setState(statesEnum.FALLING, 1);
         }
 
     }
@@ -75,7 +75,7 @@ export class Falling extends State {
     }
     handleInput(input) {
         if (this.player.onGround()) {
-            this.player.setState(statesEnum.RUNNING);
+            this.player.setState(statesEnum.RUNNING, 1);
         }
     }
 }

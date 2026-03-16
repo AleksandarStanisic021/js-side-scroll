@@ -17,7 +17,7 @@ class Game {
     this.height = height;
     this.player = new Player(this);
     this.input = new InputHandler();
-    this.speed = 5;
+    this.speed = 1;
     this.background = new Background(this);
     //this.groundMargin = 5;
   }
