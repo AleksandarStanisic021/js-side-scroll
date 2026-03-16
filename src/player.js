@@ -23,6 +23,8 @@ export class Player {
         this.FrameY = 0;
         this.speed = 0;
         this.maxSpeed = 10;
+        this.maxFrame = 5;
+        this.currentFrame = 0;
         this.velocityRight = 1;
         this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this)]
         this.currentState = this.states[0];
@@ -40,6 +42,10 @@ export class Player {
         this.y += this.vy;
         if (!this.onGround()) this.vy += this.velocityRight;
         else this.vy = 0;
+
+        if (this.FrameX < this.maxFrame) this.FrameX++;
+        else this.FrameX = 0;
+
     }
 
     draw(context) {
