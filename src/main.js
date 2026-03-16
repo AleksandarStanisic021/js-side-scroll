@@ -1,6 +1,8 @@
 import './assets/style.css'
 import { Player } from './player.js';
 import { InputHandler } from './input.js'
+import { Background } from './background.js'
+
 
 
 
@@ -15,13 +17,17 @@ class Game {
     this.height = height;
     this.player = new Player(this);
     this.input = new InputHandler();
+    this.speed = 5;
+    this.background = new Background(this);
     //this.groundMargin = 5;
   }
   update(deltaTime) {
+    this.background.update();
     this.player.update(this.input.keys, deltaTime);
   }
 
   draw(context) {
+    this.background.draw(context);
     this.player.draw(context);
   }
 }
