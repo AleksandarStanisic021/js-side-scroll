@@ -15,6 +15,7 @@ class Game {
     this.height = height;
     this.player = new Player(this);
     this.input = new InputHandler();
+    //this.groundMargin = 5;
   }
   update(deltaTime) {
     this.player.update(this.input.keys, deltaTime);

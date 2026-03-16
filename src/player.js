@@ -16,7 +16,7 @@ export class Player {
         this.width = 100;
         this.height = 91.3;
         this.x = 0;
-        this.y = this.game.height - this.height;
+        this.y = this.game.height - this.height - 50
         this.vy = 0;
         this.image = dogImage;
         this.FrameX = 0;
@@ -31,6 +31,8 @@ export class Player {
         this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this)]
         this.currentState = this.states[0];
         this.currentState.enter();
+        //        console.log(this.y);
+
     }
 
     update(input, deltaTime) {
@@ -64,7 +66,9 @@ export class Player {
             this.width,
             this.height);
     }
-    onGround() { return this.y >= this.game.height - this.height; }
+    onGround() {
+        return this.y >= this.game.height - this.height - 50
+    }
 
     setState(state) {
         // `state` is an index from the states enum; map to the state instance
