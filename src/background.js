@@ -61,5 +61,4 @@ export class Background {
     draw(context) {
         this.layers.forEach(layer => layer.draw(context));
     }
-
 }
