@@ -1,8 +1,6 @@
 import enemy1Src from './assets/enemy_fly.png'
 import enemy2Src from './assets/enemy_plant.png'
-import enemy3Src from './assets/enemy_spider.png'
-
-
+import enemy3Src from './assets/enemy_spider_big.png'
 
 const enemy_Fly = new Image();
 enemy_Fly.src = enemy1Src;
@@ -10,10 +8,6 @@ const enemy_Plant = new Image();
 enemy_Plant.src = enemy2Src;
 const enemy_Spider = new Image();
 enemy_Spider.src = enemy3Src;
-
-
-
-
 
 class Enemy {
     constructor() {
@@ -24,21 +18,46 @@ class Enemy {
         this.frameTimer = 0;
         this.markedForDeletion = false;
     }
-    update() {
+    update(deltaTime) {
+        this.x -= this.speedX;
+        this.y += this.speedY;
+        if (this.frameTimer > this.frameInterval) {
+            this.frameTimer = 0;
+            if (this.FrameX < this.maxFrame) this.FrameX++;
+            else this.FrameX = 0;
+        } else {
+            this.frameTimer += deltaTime;
+        }
+
     }
-    draw() {
+    draw(context) {
+        context.drawImage(this.image,
+            this.FrameX * this.width,
+            0,
+            this.width,
+            this.height,
+            this.x, this.y,
+            this.width,
+            this.height);
     }
 }
 
 export class FlyingEnemy extends Enemy {
-    constructor() {
+    constructor(game) {
         super();
+        this.game = game;
         this.width = 60;
         this.height = 44;
-        this.x = canvas.width;
-        this.y = Math.random() * (canvas.height - this.height);
-        this.directionX = Math.random() * 5 + 1;
-        this.directionY = Math.random();
+        this.x = this.game.width;
+        this.y = 200;
+        this.speedX = 2;
+        this.speedY = 0;
+        this.maxFrame = 5;
+        this.image = enemy_Fly;
+    }
+    update(deltaTime) {
+        super.update(deltaTime);
+        if (this.x < 0 - this.width) this.markedForDeletion = true
     }
 }
 

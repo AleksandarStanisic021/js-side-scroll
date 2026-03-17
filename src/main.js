@@ -2,6 +2,8 @@ import './assets/style.css'
 import { Player } from './player.js';
 import { InputHandler } from './input.js'
 import { Background } from './background.js'
+import { FlyingEnemy, GroundEnemy, ClimbingEnemy } from './enemy.js'
+
 
 
 
@@ -20,28 +22,55 @@ class Game {
     this.speed = 1;
     this.background = new Background(this);
     //this.groundMargin = 5;
+    this.enemies = [];
+    this.enemyTimer = 0;
+    this.enemyInterval = 1000;
   }
   update(deltaTime) {
     this.background.update();
     this.player.update(this.input.keys, deltaTime);
+    if (this.enemyTimer > this.enemyInterval) {
+      this.addEnemy();
+      this.enemyTimer = 0;
+    } else {
+      this.enemyTimer += deltaTime;
+    }
+    this.enemies.forEach(enemy => {
+      enemy.update(deltaTime);
+    });
   }
 
   draw(context) {
     this.background.draw(context);
     this.player.draw(context);
+    this.enemies.forEach(enemy => {
+      enemy.draw(context);
+
+    });
+  }
+
+  addEnemy() {
+    this.enemies.push(new FlyingEnemy(this));
+
+
   }
 }
 
 let game = new Game(canvas1.width, canvas1.height);
+let enemyFly = new FlyingEnemy(game);
+
 
 let lastFrameTime = 0
+
+
 function animate(timeStamp) {
   let deltaTime = timeStamp - lastFrameTime;
   lastFrameTime = timeStamp;
-
   ctx.clearRect(0, 0, canvas1.width, canvas1.height);
+
   game.update(deltaTime);
   game.draw(ctx);
+
 
   window.requestAnimationFrame(animate);
 }
