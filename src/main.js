@@ -68,6 +68,7 @@ function animate(timeStamp) {
   lastFrameTime = timeStamp;
   ctx.clearRect(0, 0, canvas1.width, canvas1.height);
 
+
   game.update(deltaTime);
   game.draw(ctx);
 
