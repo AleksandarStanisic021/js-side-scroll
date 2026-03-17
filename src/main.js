@@ -5,9 +5,6 @@ import { Background } from './background.js'
 import { FlyingEnemy, GroundEnemy, ClimbingEnemy } from './enemy.js'
 
 
-
-
-
 const canvas1 = document.getElementById('canvas1')
 canvas1.width = 500;
 canvas1.height = 500;
@@ -24,7 +21,7 @@ class Game {
     //this.groundMargin = 5;
     this.enemies = [];
     this.enemyTimer = 0;
-    this.enemyInterval = 1000;
+    this.enemyInterval = 1500;
   }
   update(deltaTime) {
     this.background.update();
@@ -37,6 +34,7 @@ class Game {
     }
     this.enemies.forEach(enemy => {
       enemy.update(deltaTime);
+      if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
     });
   }
 
@@ -45,20 +43,22 @@ class Game {
     this.player.draw(context);
     this.enemies.forEach(enemy => {
       enemy.draw(context);
-
     });
   }
 
   addEnemy() {
-    this.enemies.push(new FlyingEnemy(this));
+    if (this.speed > 0 && Math.random() < 0.5)
+      this.enemies.push(new GroundEnemy(this));
 
+    if (this.speed > 0)
+      this.enemies.push(new FlyingEnemy(this));
 
+    if (this.speed > 0 && Math.random() < 0.5)
+      this.enemies.push(new ClimbingEnemy(this));
   }
 }
 
 let game = new Game(canvas1.width, canvas1.height);
-let enemyFly = new FlyingEnemy(game);
-
 
 let lastFrameTime = 0
 
