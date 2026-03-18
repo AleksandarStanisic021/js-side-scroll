@@ -3,6 +3,7 @@ import { Sitting } from './playerStates.js';
 import { Running } from './playerStates.js';
 import { Jumping } from './playerStates.js';
 import { Falling } from './playerStates.js';
+import { Rolling } from './playerStates.js';
 
 
 
@@ -28,11 +29,10 @@ export class Player {
         this.delay = 50;
         this.currentFrame = 0;
         this.velocityRight = 1;
-        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this)]
+        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this), new Rolling(this)]
         this.currentState = this.states[0];
         this.currentState.enter();
-        //        console.log(this.y);
-
+        //        console.log(this.y);  
     }
 
     update(input, deltaTime) {
