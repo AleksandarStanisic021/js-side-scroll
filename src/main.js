@@ -12,18 +12,21 @@ const ctx = canvas1.getContext('2d')
 
 class Game {
   constructor(width, height) {
+    this.score = 0;
     this.width = width;
     this.height = height;
     this.player = new Player(this);
-    this.input = new InputHandler();
+    this.input = new InputHandler(this);
     this.speed = 1;
     this.background = new Background(this);
     //this.groundMargin = 5;
     this.enemies = [];
     this.enemyTimer = 0;
     this.enemyInterval = 1500;
+    this.debug = false;
   }
   update(deltaTime) {
+
     this.background.update();
     this.player.update(this.input.keys, deltaTime);
     if (this.enemyTimer > this.enemyInterval) {
@@ -71,7 +74,6 @@ function animate(timeStamp) {
 
   game.update(deltaTime);
   game.draw(ctx);
-
 
   window.requestAnimationFrame(animate);
 }
