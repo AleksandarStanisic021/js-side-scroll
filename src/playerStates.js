@@ -1,3 +1,5 @@
+import { Dust } from "./particle";
+
 
 let statesEnum = {
     SITTING: 0,
@@ -10,14 +12,15 @@ let statesEnum = {
 }
 
 class State {
-    constructor(state) {
+    constructor(state, player) {
         this.state = state;
+        this.player = player;
+        this.game = player.game;
     }
 }
 export class Sitting extends State {
-    constructor(player) {
-        super('SITTING');
-        this.player = player;
+    constructor(game) {
+        super('SITTING', game);
     }
     enter() {
         this.player.FrameY = 5;
@@ -33,16 +36,18 @@ export class Sitting extends State {
     }
 }
 export class Running extends State {
-    constructor(player) {
-        super('RUNNING');
-        this.player = player;
+    constructor(game) {
+        super('RUNNING', game);
+
     }
     enter() {
+
         this.player.maxFrame = 8;
         this.player.FrameY = 3;
     }
 
     handleInput(input) {
+        this.game.particles.push(new Dust(this.game, this.player.x + this.player.width / 2, this.player.y));
         if (input.includes('ArrowDown')) {
             this.player.setState(statesEnum.SITTING, 0);
         } else if (input.includes('ArrowUp')) {
@@ -54,9 +59,9 @@ export class Running extends State {
 }
 
 export class Jumping extends State {
-    constructor(player) {
-        super('JUMPING');
-        this.player = player;
+    constructor(game) {
+        super('JUMPING', game);
+
     }
     enter() {
         if (this.player.onGround()) this.player.vy -= 25;
@@ -77,9 +82,9 @@ export class Jumping extends State {
 
 export class Falling extends State {
 
-    constructor(player) {
-        super('FALLING');
-        this.player = player;
+    constructor(game) {
+        super('FALLING', game);
+
     }
     enter() {
         this.player.FrameY = 2;
@@ -93,9 +98,9 @@ export class Falling extends State {
 }
 
 export class Rolling extends State {
-    constructor(player) {
-        super('ROLLING');
-        this.player = player;
+    constructor(game) {
+        super('ROLLING', game);
+
     }
     enter() {
         this.player.maxFrame = 6;

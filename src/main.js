@@ -27,6 +27,7 @@ class Game {
     this.enemyInterval = 1500;
     this.debug = false;
     this.UI = new UI(this);
+    this.particles = [];
   }
   update(deltaTime) {
 
@@ -42,6 +43,10 @@ class Game {
       enemy.update(deltaTime);
       if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
     });
+    this.particles.forEach((particle, index) => {
+      particle.update();
+      if (particle.markedForDeletion) this.particles.splice(index, 1);
+    });
   }
 
   draw(context) {
@@ -51,6 +56,9 @@ class Game {
       enemy.draw(context);
     });
     this.UI.draw(context);
+    this.particles.forEach(particle => {
+      particle.draw(context);
+    });
   }
 
   addEnemy() {
