@@ -3,6 +3,7 @@ import { Player } from './player.js';
 import { InputHandler } from './input.js'
 import { Background } from './background.js'
 import { FlyingEnemy, GroundEnemy, ClimbingEnemy } from './enemy.js'
+import { UI } from './UI.js'
 
 
 const canvas1 = document.getElementById('canvas1')
@@ -13,6 +14,7 @@ const ctx = canvas1.getContext('2d')
 class Game {
   constructor(width, height) {
     this.score = 0;
+    this.fontColor = 'black';
     this.width = width;
     this.height = height;
     this.player = new Player(this);
@@ -24,6 +26,7 @@ class Game {
     this.enemyTimer = 0;
     this.enemyInterval = 1500;
     this.debug = false;
+    this.UI = new UI(this);
   }
   update(deltaTime) {
 
@@ -47,6 +50,7 @@ class Game {
     this.enemies.forEach(enemy => {
       enemy.draw(context);
     });
+    this.UI.draw(context);
   }
 
   addEnemy() {
