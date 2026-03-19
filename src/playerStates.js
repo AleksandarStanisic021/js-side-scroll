@@ -40,7 +40,6 @@ export class Running extends State {
 
     }
     enter() {
-
         this.player.maxFrame = 8;
         this.player.FrameY = 3;
     }
@@ -68,6 +67,7 @@ export class Jumping extends State {
         this.player.maxFrame = 6;
     }
     handleInput(input) {
+        this.game.particles.push(new Fire(this.game, this.player.x + this.player.width / 2 - 50, this.player.y));
         if (this.player.vy > this.player.velocityRight) {
             this.player.setState(statesEnum.FALLING, 1);
         } else if (input.includes('Enter') && !this.player.onGround()) {
