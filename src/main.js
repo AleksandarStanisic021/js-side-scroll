@@ -64,11 +64,8 @@ class Game {
     if (this.speed > 0 && Math.random() < 0.5)
       this.enemies.push(new GroundEnemy(this));
 
-
-
     if (this.speed > 0)
       this.enemies.push(new FlyingEnemy(this));
-
     if (this.speed > 0 && Math.random() < 0.5)
       this.enemies.push(new ClimbingEnemy(this));
   }
@@ -76,8 +73,7 @@ class Game {
 
 let game = new Game(canvas1.width, canvas1.height);
 
-let lastFrameTime = 0
-
+let lastFrameTime = 0;
 
 function animate(timeStamp) {
   let deltaTime = timeStamp - lastFrameTime;
