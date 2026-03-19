@@ -114,8 +114,6 @@ export class Rolling extends State {
         }
     }
 }
-
-
 export class Hit extends State {
     constructor(game) {
         super('HIT', game);
