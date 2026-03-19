@@ -7,8 +7,7 @@ let statesEnum = {
     JUMPING: 2,
     FALLING: 3,
     ROLLING: 4,
-    DIVING: 5,
-    HIT: 6,
+    HIT: 5,
 }
 
 class State {
@@ -117,3 +116,21 @@ export class Rolling extends State {
 }
 
 
+export class Hit extends State {
+    constructor(game) {
+        super('HIT', game);
+    }
+    enter() {
+        this.player.FrameY = 4;
+        this.player.maxFrame = 10;
+        this.player.FrameX = 0;
+    }
+    handleInput(input) {
+        if (this.player.FrameX >= 10 && this.player.onGround()) {
+            this.player.setState(statesEnum.RUNNING, 1);
+        }
+        else if (this.player.FrameX >= 10 && !this.player.onGround()) {
+            this.player.setState(statesEnum.FALLING, 1);
+        }
+    }
+}

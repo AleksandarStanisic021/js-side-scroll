@@ -4,6 +4,7 @@ import { Running } from './playerStates.js';
 import { Jumping } from './playerStates.js';
 import { Falling } from './playerStates.js';
 import { Rolling } from './playerStates.js';
+import { Hit } from './playerStates.js';
 
 
 
@@ -29,7 +30,12 @@ export class Player {
         this.delay = 50;
         this.currentFrame = 0;
         this.velocityRight = 1;
-        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this), new Rolling(this)]
+        this.states = [new Sitting(this),
+        new Running(this),
+        new Jumping(this),
+        new Falling(this),
+        new Rolling(this),
+        new Hit(this)]
         this.currentState = this.states[0];
         this.currentState.enter();
         //        console.log(this.y);  
@@ -84,8 +90,11 @@ export class Player {
         this.game.enemies.forEach(enemy => {
             if (enemy.x < this.x + this.width && enemy.x + enemy.width > this.x && enemy.y < this.y + this.height && enemy.y + enemy.height > this.y) {
                 enemy.markedForDeletion = true;
-                this.game.score++;
-                console.log(this.game.score);
+                if (this.currentState === this.states[4] || this.currentState === this.states[5]) {
+                    this.game.score++;
+                } else {
+                    this.setState(5, 0);
+                }
             }
         }
         )
