@@ -7,7 +7,7 @@ import { UI } from './UI.js'
 
 
 const canvas1 = document.getElementById('canvas1')
-canvas1.width = 500;
+canvas1.width = 900;
 canvas1.height = 500;
 const ctx = canvas1.getContext('2d')
 
@@ -30,7 +30,6 @@ class Game {
     this.particles = [];
   }
   update(deltaTime) {
-
     this.background.update();
     this.player.update(this.input.keys, deltaTime);
     if (this.enemyTimer > this.enemyInterval) {
@@ -65,6 +64,8 @@ class Game {
     if (this.speed > 0 && Math.random() < 0.5)
       this.enemies.push(new GroundEnemy(this));
 
+
+
     if (this.speed > 0)
       this.enemies.push(new FlyingEnemy(this));
 
@@ -83,10 +84,10 @@ function animate(timeStamp) {
   lastFrameTime = timeStamp;
   ctx.clearRect(0, 0, canvas1.width, canvas1.height);
 
-
   game.update(deltaTime);
   game.draw(ctx);
 
   window.requestAnimationFrame(animate);
 }
 animate(0);
+
