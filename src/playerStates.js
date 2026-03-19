@@ -1,4 +1,4 @@
-import { Dust } from "./particle";
+import { Dust, Fire, Splash } from "./particle";
 
 
 let statesEnum = {
@@ -84,7 +84,6 @@ export class Falling extends State {
 
     constructor(game) {
         super('FALLING', game);
-
     }
     enter() {
         this.player.FrameY = 2;
@@ -93,6 +92,7 @@ export class Falling extends State {
     handleInput(input) {
         if (this.player.onGround()) {
             this.player.setState(statesEnum.RUNNING, 1);
+            this.game.particles.push(new Splash(this.game, this.player.x + this.player.width / 2 - 50, this.player.y - 50));
         }
     }
 }
@@ -107,6 +107,7 @@ export class Rolling extends State {
         this.player.FrameY = 6;
     }
     handleInput(input) {
+        this.game.particles.push(new Fire(this.game, this.player.x + this.player.width / 2 - 50, this.player.y));
         if (!input.includes('Enter') && this.player.onGround()) {
             this.player.setState(statesEnum.RUNNING, 1)
         } else if (!input.includes('Enter') && !this.player.onGround()) {
